@@ -5,7 +5,10 @@ import seaborn as sns
 from scipy.stats import norm
 
 
-stock_data = yf.download('AAPL', start='2020-01-01', end='2023-01-01')
+stock_ticker = 'GME'
+start_date = '2020-01-01'
+end_date = '2024-05-16'
+stock_data = yf.download(stock_ticker, start=start_date, end=end_date)
 stock_data.to_csv("AppleStockData.csv")
 
 stock_data['Price Change'] = stock_data['Adj Close'].diff()
@@ -19,7 +22,7 @@ fig, axs = plt.subplots(3, 1, figsize=(10, 7))
 
 # Stock price over time
 axs[0].plot(stock_data.index, stock_data['Adj Close'], label='Adjusted Close Price', color='blue')
-axs[0].set_title('AAPL Stock Price Over Time (2020-01-01 to 2023-01-01)')
+axs[0].set_title(f'{stock_ticker} Stock Price Over Time ({start_date} to {end_date})')
 axs[0].set_xlabel('Date')
 axs[0].set_ylabel('Adjusted Close Price')
 axs[0].legend()
