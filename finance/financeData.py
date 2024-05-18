@@ -9,7 +9,7 @@ stock_ticker = 'GME'
 start_date = '2020-01-01'
 end_date = '2024-05-16'
 stock_data = yf.download(stock_ticker, start=start_date, end=end_date)
-stock_data.to_csv("AppleStockData.csv")
+stock_data.to_csv(F"{stock_ticker}StockData.csv")
 
 stock_data['Price Change'] = stock_data['Adj Close'].diff()
 stock_data['Log Return'] = np.log(stock_data['Adj Close'] / stock_data['Adj Close'].shift(1))
@@ -18,7 +18,7 @@ log_returns = stock_data['Log Return'].dropna()
 
 
 mu, std = norm.fit(log_returns)
-fig, axs = plt.subplots(3, 1, figsize=(10, 7))
+fig, axs = plt.subplots(3, 1, figsize=(10, 7.5))
 
 # Stock price over time
 axs[0].plot(stock_data.index, stock_data['Adj Close'], label='Adjusted Close Price', color='blue')
